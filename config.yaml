@@ -1,0 +1,27 @@
+outputFileName: outputXML
+sfdc_metadata: http://soap.sforce.com/2006/04/metadata
+
+parseprofile: 0
+parseprofileToMatrix: 1
+
+inputdir: C:/temp/profiles
+withns: true
+targetNote: userPermissions
+targetKey: name
+targetSubNotes: [filename, name, enabled]
+targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+
+#targetNote: objectPermissions
+#targetKey: object
+#targetSubNotes: [filename, object, allowRead]
+#targetObjs: [Account, ActivityStatus__c]
+
+#inputdir: C:/temp/profiles
+#withns: false
+#targetNote: fieldPermissions
+#targetSubNotes: [filename, field, readable, editable]
+
+#inputdir: C:/temp/queues
+#withns: true
+#targetNote: queueSobject
+#targetSubNotes: [filename, sobjectType]

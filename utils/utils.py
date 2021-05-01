@@ -1,0 +1,84 @@
+import csv
+import os
+import xml.etree.ElementTree as ET
+import yaml
+
+def getConfigInfo(configFileName):
+    with open(configFileName) as file:
+        configObj = yaml.safe_load(file)
+    return configObj
+
+def savetoCSV(fields, dataList, filename):
+    # specifying the fields for csv file
+    # fields = ['filename', 'field', 'readable', 'editable']
+    # writing to csv file
+    with open(filename, "a", newline="", encoding="utf_8_sig") as csvfile:
+        # creating a csv dict writer object
+        writer = csv.DictWriter(csvfile, fieldnames=fields)
+        # writing headers (field names)
+        # if isOutputHead : writer.writeheader()
+        writer.writeheader()
+        # writing data rows
+        writer.writerows(dataList)
+
+def parseXMLWithns(xmlfile, note_fieldPermissions, targetNote, sfdc_metadata):
+    ns = {'sfdc-metadata': sfdc_metadata}
+
+    # create element tree object
+    tree = ET.parse(xmlfile)
+    # get root element
+    root = tree.getroot()
+    # create empty list for items
+    datas = []
+
+    # iterate items
+    isHavingtargetNote = False
+    for item in root.findall('sfdc-metadata:' + targetNote, ns):
+        isHavingtargetNote = True
+        # empty employs dictionary
+        notes = {'filename' : os.path.basename(xmlfile)}
+        # iterate child elements of item
+        for child in item:
+            if(child.tag.split('}')[- 1] in note_fieldPermissions):
+                notes[child.tag.split('}')[- 1]] = child.text
+        # append employs dictionary to list
+        datas.append(notes)
+
+    if(not isHavingtargetNote):
+        notes = {'filename': os.path.basename(xmlfile)}
+        datas.append(notes)
+    # print('parseXMLWithns ###################')
+    # print(datas)
+    # return list
+    return datas
+
+def parseXMLWithoutNs(xmlfile, note_fieldPermissions, targetNote):
+    # create element tree object
+    tree = ET.parse(xmlfile)
+    # get root element
+    root = tree.getroot()
+    # create empty list for items
+    datas = []
+
+    # iterate items
+    isHavingtargetNote = False
+    for item in root.findall('./' + targetNote):
+        isHavingtargetNote = True
+        # empty employs dictionary
+        notes = {'filename': os.path.basename(xmlfile)}
+        # iterate child elements of item
+        for child in item:
+            if (child.tag in note_fieldPermissions):
+                notes[child.tag] = child.text
+        # append employs dictionary to list
+        datas.append(notes)
+
+    if(not isHavingtargetNote):
+        notes = {'filename': os.path.basename(xmlfile)}
+        datas.append(notes)
+
+    # print('parseXMLWithoutNs ###################')
+    # print(datas)
+    # return list
+    return datas
+
