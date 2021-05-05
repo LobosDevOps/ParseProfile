@@ -6,10 +6,21 @@ parseprofileToMatrix: 1
 
 inputdir: C:/temp/profiles
 withns: true
+
 targetNote: userPermissions
 targetKey: name
 targetSubNotes: [filename, name, enabled]
 targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+
+# targetNote:
+#   userPermissions:
+#     targetKey: name
+#     targetSubNotes: [filename, name, enabled]
+#     targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+#   tabVisibilities:
+#     targetKey: tab
+#     targetSubNotes: [filename, tab, visibility]
+#     targetObjs: [standard-Task,standard-Contact]
 
 #targetNote: objectPermissions
 #targetKey: object
