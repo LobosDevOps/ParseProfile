@@ -30,7 +30,8 @@ def getXmlDataToCsvByMatrix(configObj, targetSubNotekey):
     for xmlDataMap in xmlDataList:
         print('xmlDataMap:', xmlDataMap)
         index = 0
-        allowRead = ''
+        cellKey = ''
+        cellValue = ''
         for key, value in xmlDataMap.items():
             # print(index, key, value)
             if (index == 0):
@@ -42,13 +43,14 @@ def getXmlDataToCsvByMatrix(configObj, targetSubNotekey):
             else:
                 if (targetSubNotekey == key):
                     csvHead += ',' + value
-                    notes[value] = allowRead
+                    cellKey = value
                     # print('notes :', notes)
                 else:
-                    allowRead = value
+                    cellValue = value
 
             # print(fileDataMap.values())
             index += 1
+        notes[cellKey] = cellValue
 
     # print(csvHead)
     # print(fileDataMap.values())
