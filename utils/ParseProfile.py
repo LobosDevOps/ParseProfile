@@ -65,10 +65,19 @@ def getConfig(configObj):
     configMap['csv_targetKey'] = configObj['csv']['targetKey']
 
     # For Excel(Matrix)
-    configMap['exl_targetNote'] = configObj['exl']['targetNote']
-    configMap['exl_targetSubNotes'] = configObj['exl']['targetSubNotes']
-    configMap['exl_targetKey'] = configObj['exl']['targetKey']
-    configMap['exl_targetObjs'] = configObj['exl']['targetObjs']
+    # userPermissions
+    configMap['exl_usrPms_targetNote'] = configObj['exl']['userPermissions']['targetNote']
+    configMap['exl_usrPms_load'] = configObj['exl']['userPermissions']['load']
+    configMap['exl_usrPms_targetSubNotes'] = configObj['exl']['userPermissions']['targetSubNotes']
+    configMap['exl_usrPms_targetKey'] = configObj['exl']['userPermissions']['targetKey']
+    configMap['exl_usrPms_targetObjs'] = configObj['exl']['userPermissions']['targetObjs']
+
+    # tabVisibilities
+    configMap['exl_tab_targetNote'] = configObj['exl']['tabVisibilities']['targetNote']
+    configMap['exl_tab_load'] = configObj['exl']['tabVisibilities']['load']
+    configMap['exl_tab_targetSubNotes'] = configObj['exl']['tabVisibilities']['targetSubNotes']
+    configMap['exl_tab_targetKey'] = configObj['exl']['tabVisibilities']['targetKey']
+    configMap['exl_tab_targetObjs'] = configObj['exl']['tabVisibilities']['targetObjs']
 
     print('configMap', configMap)
     return configMap
@@ -111,16 +120,8 @@ def outputXmlDataToCsvByMatrix(configObj, isOutputFile):
             os.remove(outputFileName)
         utils.savetoCSV(dataMap['head'].split(','), dataMap['datas'], outputFileName)
 
-def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
-    configMap = getConfig(configObj)
-    path = configMap['inputdir']
-    sfdc_metadata = configMap['sfdc_metadata']
-    targetNote = configMap['exl_targetNote']
-    targetSubNotes = configMap['exl_targetSubNotes']
-    withns = configMap['withns']
-    targetKey = configMap['exl_targetKey']
-    targetObjs = configMap['exl_targetObjs']
-
+# Excel Common
+def addExcelSheet(wb, path, sfdc_metadata, withns, targetNote, targetSubNotes, targetKey, targetObjs):
     targetObjs.insert(0, 'filename')
     # print('targetObjs:', targetObjs)
 
@@ -129,8 +130,7 @@ def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
     datas = dataMap['datas']
     # print('list(datas):', datas)
 
-    wb = Workbook()
-    sheet = wb.active
+    sheet = wb.create_sheet(title=targetNote)
 
     for i, objName in enumerate(targetObjs, start=0):
         sheet.cell(i+1, 1, value=objName)
@@ -146,6 +146,53 @@ def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
                 cellValue = ''
             sheet.cell(row=columnNum, column=rowNum).value = cellValue
 
+    return sheet
+
+# userPermissions
+def addUserPermissionsSheet(wb, configMap, path, sfdc_metadata, withns):
+    # userPermissions
+    targetNote = configMap['exl_usrPms_targetNote']
+    load = configMap['exl_usrPms_load']
+    targetSubNotes = configMap['exl_usrPms_targetSubNotes']
+    targetKey = configMap['exl_usrPms_targetKey']
+    targetObjs = configMap['exl_usrPms_targetObjs']
+
+    if(load == False):
+        return
+
+    addExcelSheet(wb, path, sfdc_metadata, withns, targetNote, targetSubNotes, targetKey, targetObjs)
+
+# tabVisibilities
+def addTabVisibilitiesSheet(wb, configMap, path, sfdc_metadata, withns):
+    # tabVisibilities
+    targetNote = configMap['exl_tab_targetNote']
+    load = configMap['exl_tab_load']
+    targetSubNotes = configMap['exl_tab_targetSubNotes']
+    targetKey = configMap['exl_tab_targetKey']
+    targetObjs = configMap['exl_tab_targetObjs']
+    if(load == False):
+        return
+
+    addExcelSheet(wb, path, sfdc_metadata, withns, targetNote, targetSubNotes, targetKey, targetObjs)
+
+
+def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
+    configMap = getConfig(configObj)
+    path = configMap['inputdir']
+    sfdc_metadata = configMap['sfdc_metadata']
+    withns = configMap['withns']
+
+    wb = Workbook()
+
+    # userPermissions
+    addUserPermissionsSheet(wb, configMap, path, sfdc_metadata, withns)
+
+    # tabVisibilities
+    addTabVisibilitiesSheet(wb, configMap, path, sfdc_metadata, withns)
+
+    print(wb.sheetnames)
+    if(len(wb.sheetnames) > 1):
+        wb.remove(wb.worksheets[0])
     wb.save('testリスト追加3.xlsx')
 
     # for rowNum, datas in enumerate(datas, start=2):

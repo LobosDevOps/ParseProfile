@@ -17,10 +17,18 @@ csv:
 
 # For Excel(Matrix)
 exl:
-  targetNote: userPermissions
-  targetSubNotes: [filename, name, enabled]
-  targetKey: name
-  targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+  userPermissions:
+    targetNote: userPermissions
+    load: true
+    targetSubNotes: [filename, name, enabled]
+    targetKey: name
+    targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+  tabVisibilities:
+    targetNote: tabVisibilities
+    load: true
+    targetSubNotes: [filename, tab, visibility]
+    targetKey: tab
+    targetObjs: [standard-Contact,standard-Task]
 
 # For Excel
 # targetNote:

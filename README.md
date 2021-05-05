@@ -1,2 +1,0 @@
-# ParseProfile
-Python sfdc metadata
