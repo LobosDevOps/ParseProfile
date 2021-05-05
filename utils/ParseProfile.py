@@ -52,15 +52,33 @@ def getXmlDataToCsvByMatrix(path, targetNote, targetSubNotes, withns, sfdc_metad
     print('resultMap : ', resultMap)
     return resultMap
 
+def getConfig(configObj):
+    configMap = {}
+    configMap['inputdir'] = configObj['inputdir']
+    configMap['sfdc_metadata'] = configObj['sfdc_metadata']
+    configMap['withns'] = configObj['withns']
+
+    configMap['targetNote'] = configObj['targetNote']
+    configMap['targetSubNotes'] = configObj['targetSubNotes']
+    configMap['outputFileName'] = configObj['outputFileName']
+
+    configMap['targetKey'] = configObj['targetKey']
+    configMap['targetObjs'] = configObj['targetObjs']
+
+    print('configMap', configMap)
+    return configMap
+
 def outputXmlDataToCsvByList(configObj, isOutputFile):
-    path = configObj['inputdir']
-    sfdc_metadata = configObj['sfdc_metadata']
-    withns = configObj['withns']
+    configMap = getConfig(configObj)
 
-    targetNote = configObj['targetNote']
-    targetSubNotes = configObj['targetSubNotes']
+    path = configMap['inputdir']
+    sfdc_metadata = configMap['sfdc_metadata']
+    withns = configMap['withns']
 
-    outputFileName = configObj['outputFileName'] + '_' + path.split('/')[- 1] + '_' + targetNote + '.csv'
+    targetNote = configMap['targetNote']
+    targetSubNotes = configMap['targetSubNotes']
+
+    outputFileName = configMap['outputFileName'] + '_' + path.split('/')[- 1] + '_' + targetNote + '.csv'
     xmldata = getXmlDataByList(path, targetNote, targetSubNotes, withns, sfdc_metadata)
 
     if isOutputFile:
@@ -69,14 +87,15 @@ def outputXmlDataToCsvByList(configObj, isOutputFile):
         utils.savetoCSV(targetSubNotes, xmldata, outputFileName)
 
 def outputXmlDataToCsvByMatrix(configObj, isOutputFile):
-    path = configObj['inputdir']
-    sfdc_metadata = configObj['sfdc_metadata']
-    targetNote = configObj['targetNote']
-    targetSubNotes = configObj['targetSubNotes']
-    withns = configObj['withns']
-    targetKey = configObj['targetKey']
+    configMap = getConfig(configObj)
+    path = configMap['inputdir']
+    sfdc_metadata = configMap['sfdc_metadata']
+    targetNote = configMap['targetNote']
+    targetSubNotes = configMap['targetSubNotes']
+    withns = configMap['withns']
+    targetKey = configMap['targetKey']
 
-    outputFileName = configObj['outputFileName'] + '_' + path.split('/')[- 1] + '_' + targetNote + '.csv'
+    outputFileName = configMap['outputFileName'] + '_' + path.split('/')[- 1] + '_' + targetNote + '.csv'
 
     dataMap = getXmlDataToCsvByMatrix(path, targetNote, targetSubNotes, withns, sfdc_metadata, targetKey)
     if isOutputFile:
@@ -85,14 +104,15 @@ def outputXmlDataToCsvByMatrix(configObj, isOutputFile):
         utils.savetoCSV(dataMap['head'].split(','), dataMap['datas'], outputFileName)
 
 def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
-    path = configObj['inputdir']
-    sfdc_metadata = configObj['sfdc_metadata']
-    targetNote = configObj['targetNote']
-    targetSubNotes = configObj['targetSubNotes']
-    withns = configObj['withns']
-    targetKey = configObj['targetKey']
+    configMap = getConfig(configObj)
+    path = configMap['inputdir']
+    sfdc_metadata = configMap['sfdc_metadata']
+    targetNote = configMap['targetNote']
+    targetSubNotes = configMap['targetSubNotes']
+    withns = configMap['withns']
+    targetKey = configMap['targetKey']
+    targetObjs = configMap['targetObjs']
 
-    targetObjs = configObj['targetObjs']
     targetObjs.insert(0, 'filename')
     # print('targetObjs:', targetObjs)
 
