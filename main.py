@@ -14,8 +14,8 @@ def main():
 
     if configObj['parseprofileToMatrix'] == 1:
         print('### outputXmlDataToCsvByMatrix start ###')
-        ParseProfile.outputXmlDataToCsvByMatrix(configObj, True)
-        # ParseProfile.outputXmlDataToExcelByMatrix(configObj, True)
+        # ParseProfile.outputXmlDataToCsvByMatrix(configObj, True)
+        ParseProfile.outputXmlDataToExcelByMatrix(configObj, True)
         print('### outputXmlDataToCsvByMatrix end ###')
 
 if __name__ == "__main__":
