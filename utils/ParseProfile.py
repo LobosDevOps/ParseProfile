@@ -59,16 +59,16 @@ def getConfig(configObj):
     configMap['sfdc_metadata'] = configObj['sfdc_metadata']
     configMap['withns'] = configObj['withns']
 
-    # common
-    configMap['targetNote'] = configObj['common']['targetNote']
-    configMap['targetSubNotes'] = configObj['common']['targetSubNotes']
-
-    # For CSV(Matrix)
-    configMap['csv_targetKey'] = configObj['common']['csv']['targetKey']
+    # csv
+    configMap['csv_targetNote'] = configObj['csv']['targetNote']
+    configMap['csv_targetSubNotes'] = configObj['csv']['targetSubNotes']
+    configMap['csv_targetKey'] = configObj['csv']['targetKey']
 
     # For Excel(Matrix)
-    configMap['exl_targetKey'] = configObj['common']['exl']['targetKey']
-    configMap['exl_targetObjs'] = configObj['common']['exl']['targetObjs']
+    configMap['exl_targetNote'] = configObj['exl']['targetNote']
+    configMap['exl_targetSubNotes'] = configObj['exl']['targetSubNotes']
+    configMap['exl_targetKey'] = configObj['exl']['targetKey']
+    configMap['exl_targetObjs'] = configObj['exl']['targetObjs']
 
     print('configMap', configMap)
     return configMap
@@ -80,9 +80,9 @@ def outputXmlDataToCsvByList(configObj, isOutputFile):
     sfdc_metadata = configMap['sfdc_metadata']
     withns = configMap['withns']
 
-    # common
-    targetNote = configMap['targetNote']
-    targetSubNotes = configMap['targetSubNotes']
+    # csv
+    targetNote = configMap['csv_targetNote']
+    targetSubNotes = configMap['csv_targetSubNotes']
 
     outputFileName = configMap['outputFileName'] + '_' + path.split('/')[- 1] + '_' + targetNote + 'List.csv'
     xmldata = getXmlDataByList(path, targetNote, targetSubNotes, withns, sfdc_metadata)
@@ -98,11 +98,9 @@ def outputXmlDataToCsvByMatrix(configObj, isOutputFile):
     sfdc_metadata = configMap['sfdc_metadata']
     withns = configMap['withns']
 
-    # common
-    targetNote = configMap['targetNote']
-    targetSubNotes = configMap['targetSubNotes']
-
-    # For CSV(Matrix)
+    # csv
+    targetNote = configMap['csv_targetNote']
+    targetSubNotes = configMap['csv_targetSubNotes']
     targetKey = configMap['csv_targetKey']
 
     outputFileName = configMap['outputFileName'] + '_' + path.split('/')[- 1] + '_' + targetNote + 'Matrix.csv'
@@ -117,8 +115,8 @@ def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
     configMap = getConfig(configObj)
     path = configMap['inputdir']
     sfdc_metadata = configMap['sfdc_metadata']
-    targetNote = configMap['targetNote']
-    targetSubNotes = configMap['targetSubNotes']
+    targetNote = configMap['exl_targetNote']
+    targetSubNotes = configMap['exl_targetSubNotes']
     withns = configMap['withns']
     targetKey = configMap['exl_targetKey']
     targetObjs = configMap['exl_targetObjs']
@@ -148,7 +146,7 @@ def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
                 cellValue = ''
             sheet.cell(row=columnNum, column=rowNum).value = cellValue
 
-    wb.save('testリスト追加2.xlsx')
+    wb.save('testリスト追加3.xlsx')
 
     # for rowNum, datas in enumerate(datas, start=2):
     #     for columnNum, (key, value) in enumerate(datas.items(), start=1):

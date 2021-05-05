@@ -9,16 +9,18 @@ inputdir: C:/temp/profiles
 withns: true
 
 # For All(List, Matrix)
-common:
+csv:
   targetNote: userPermissions
   targetSubNotes: [filename, name, enabled]
-  # For CSV(Matrix)
-  csv:
-    targetKey: name
-  # For Excel(Matrix)
-  exl:
-    targetKey: name
-    targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+  # For Matrix
+  targetKey: name
+
+# For Excel(Matrix)
+exl:
+  targetNote: userPermissions
+  targetSubNotes: [filename, name, enabled]
+  targetKey: name
+  targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
 
 # For Excel
 # targetNote:
