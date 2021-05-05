@@ -195,6 +195,46 @@ def outputXmlDataToExcelByMatrix(configObj, isOutputFile):
         wb.remove(wb.worksheets[0])
     wb.save('testリスト追加3.xlsx')
 
+def parserProfileNote(configObj, isOutputFile):
+    fl = configObj['inputSysProfilePath']
+    outputFileName = configObj['outputFileName']
+    sfdc_metadata = configObj['sfdc_metadata']
+    withns = configObj['withns']
+
+    targetNoteMap = {}
+    targetNoteMap['applicationVisibilities'] = configObj['note']['applicationVisibilities']
+    # targetNoteMap['classAccesses'] = configObj['note']['classAccesses']
+    # targetNoteMap['fieldPermissions'] = configObj['note']['fieldPermissions']
+    # targetNoteMap['layoutAssignments'] = configObj['note']['layoutAssignments']
+    # targetNoteMap['objectPermissions'] = configObj['note']['objectPermissions']
+    # targetNoteMap['pageAccesses'] = configObj['note']['pageAccesses']
+    # targetNoteMap['recordTypeVisibilities'] = configObj['note']['recordTypeVisibilities']
+    # targetNoteMap['tabVisibilities'] = configObj['note']['tabVisibilities']
+    targetNoteMap['userPermissions'] = configObj['note']['userPermissions']
+
+    datas = {}
+    for targetNote, targetSubNotes in targetNoteMap.items():
+        if withns:
+            xmldata = utils.parseXMLWithns(fl, targetSubNotes, targetNote, sfdc_metadata)
+        else:
+            xmldata = utils.parseXMLWithoutNs(fl, targetSubNotes, targetNote)
+
+        noteValue = ''
+        for noteMap in xmldata:
+            noteValue += noteMap[targetSubNotes[0]] + ','
+            # print(noteValue)
+
+        datas[targetNote] = '[' + noteValue[:-1] + ']'
+    # print('datas', datas)
+
+    outputFileName += 'parserProfileNote.txt'
+    if isOutputFile:
+        utils.savetoTxt(datas, outputFileName)
+
+
+
+
+
     # for rowNum, datas in enumerate(datas, start=2):
     #     for columnNum, (key, value) in enumerate(datas.items(), start=1):
     #         print(rowNum, columnNum, key, value)

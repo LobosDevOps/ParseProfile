@@ -7,6 +7,12 @@ from utils import ParseProfile
 def main():
     configObj = utils.getConfigInfo('config.yaml')
 
+
+    if configObj['parserProfileNote'] == 1:
+        print('### parserProfileNote start ###')
+        ParseProfile.parserProfileNote(configObj, True)
+        print('### parserProfileNote end ###')
+
     if configObj['outputFileToCsvByList'] == 1:
         print('### outputXmlDataToCsvByList start ###')
         ParseProfile.outputXmlDataToCsvByList(configObj, True)

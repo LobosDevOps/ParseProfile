@@ -1,12 +1,27 @@
 outputFileName: outputXML
+withns: true
 sfdc_metadata: http://soap.sforce.com/2006/04/metadata
 
+#Parser profile note
+parserProfileNote: 1
+inputSysProfilePath: C:/temp/profiles/Admin.profile-meta.xml
+note:
+  applicationVisibilities: [application]
+  classAccesses: [apexClass]
+  fieldPermissions: [field]
+  layoutAssignments: [layout]
+  objectPermissions: [object]
+  pageAccesses: [apexPage]
+  recordTypeVisibilities: [recordType]
+  tabVisibilities: [tab]
+  userPermissions: [name]
+
+# Parser profile data
 outputFileToCsvByList: 0
 OutputFileToCsvByMatrix: 0
-OutputFileToExlByMatrix: 1
+OutputFileToExlByMatrix: 0
 
 inputdir: C:/temp/profiles
-withns: true
 
 # For All(List, Matrix)
 csv:

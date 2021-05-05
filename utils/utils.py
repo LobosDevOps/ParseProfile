@@ -21,7 +21,14 @@ def savetoCSV(fields, dataList, filename):
         # writing data rows
         writer.writerows(dataList)
 
-def parseXMLWithns(xmlfile, note_fieldPermissions, targetNote, sfdc_metadata):
+def savetoTxt(datas, outputFileName):
+    f = open(outputFileName, 'w', encoding='UTF-8')
+    for(key, value) in datas.items():
+        # print(key, value)
+        f.writelines(key + ':' + value + '\n')
+    f.close()
+
+def parseXMLWithns(xmlfile, targetSubNotes, targetNote, sfdc_metadata):
     ns = {'sfdc-metadata': sfdc_metadata}
 
     # create element tree object
@@ -39,7 +46,7 @@ def parseXMLWithns(xmlfile, note_fieldPermissions, targetNote, sfdc_metadata):
         notes = {'filename' : os.path.basename(xmlfile)}
         # iterate child elements of item
         for child in item:
-            if(child.tag.split('}')[- 1] in note_fieldPermissions):
+            if(child.tag.split('}')[- 1] in targetSubNotes):
                 notes[child.tag.split('}')[- 1]] = child.text
         # append employs dictionary to list
         datas.append(notes)
@@ -52,7 +59,7 @@ def parseXMLWithns(xmlfile, note_fieldPermissions, targetNote, sfdc_metadata):
     # return list
     return datas
 
-def parseXMLWithoutNs(xmlfile, note_fieldPermissions, targetNote):
+def parseXMLWithoutNs(xmlfile, targetSubNotes, targetNote):
     # create element tree object
     tree = ET.parse(xmlfile)
     # get root element
@@ -68,7 +75,7 @@ def parseXMLWithoutNs(xmlfile, note_fieldPermissions, targetNote):
         notes = {'filename': os.path.basename(xmlfile)}
         # iterate child elements of item
         for child in item:
-            if (child.tag in note_fieldPermissions):
+            if (child.tag in targetSubNotes):
                 notes[child.tag] = child.text
         # append employs dictionary to list
         datas.append(notes)
