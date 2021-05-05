@@ -1,20 +1,24 @@
 outputFileName: outputXML
 sfdc_metadata: http://soap.sforce.com/2006/04/metadata
 
-parseprofile: 1
-parseprofileToMatrix: 1
+outputFileToCsvByList: 0
+OutputFileToCsvByMatrix: 0
+OutputFileToExlByMatrix: 1
 
 inputdir: C:/temp/profiles
 withns: true
 
-# For CSV(List, Matrix)
-targetNote: userPermissions
-targetSubNotes: [filename, name, enabled]
-# For CSV(Matrix)
-targetKey: name
-
-# For Excel(Matrix)
-targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
+# For All(List, Matrix)
+common:
+  targetNote: userPermissions
+  targetSubNotes: [filename, name, enabled]
+  # For CSV(Matrix)
+  csv:
+    targetKey: name
+  # For Excel(Matrix)
+  exl:
+    targetKey: name
+    targetObjs: [CustomMobileAppsAccess,ViewHelpLink]
 
 # For Excel
 # targetNote:

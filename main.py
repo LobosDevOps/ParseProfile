@@ -7,16 +7,20 @@ from utils import ParseProfile
 def main():
     configObj = utils.getConfigInfo('config.yaml')
 
-    if configObj['parseprofile'] == 1:
+    if configObj['outputFileToCsvByList'] == 1:
         print('### outputXmlDataToCsvByList start ###')
         ParseProfile.outputXmlDataToCsvByList(configObj, True)
         print('### outputXmlDataToCsvByList end ###')
 
-    if configObj['parseprofileToMatrix'] == 1:
-        print('### outputXmlDataToCsvByMatrix start ###')
-        # ParseProfile.outputXmlDataToCsvByMatrix(configObj, True)
+    if configObj['OutputFileToCsvByMatrix'] == 1:
+        print('### OutputFileToCsvByMatrix start ###')
+        ParseProfile.outputXmlDataToCsvByMatrix(configObj, True)
+        print('### OutputFileToCsvByMatrix end ###')
+
+    if configObj['OutputFileToExlByMatrix'] == 1:
+        print('### OutputFileToExlByMatrix start ###')
         ParseProfile.outputXmlDataToExcelByMatrix(configObj, True)
-        print('### outputXmlDataToCsvByMatrix end ###')
+        print('### OutputFileToExlByMatrix end ###')
 
 if __name__ == "__main__":
     # calling main function
