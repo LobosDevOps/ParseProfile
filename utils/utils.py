@@ -44,19 +44,20 @@ def parseXMLWithns(xmlfile, targetSubNotes, targetNote, sfdc_metadata):
         isHavingtargetNote = True
         # empty employs dictionary
         notes = {'filename' : os.path.basename(xmlfile)}
-        # iterate child elements of item
-        for child in item:
-            if(child.tag.split('}')[- 1] in targetSubNotes):
-                notes[child.tag.split('}')[- 1]] = child.text
+
+        if(item.text.strip()):
+            print(item.text)
+            notes[targetNote] = item.text
+        else:
+            # iterate child elements of item
+            for child in item:
+                if(child.tag.split('}')[- 1] in targetSubNotes):
+                    notes[child.tag.split('}')[- 1]] = child.text
+
         # append employs dictionary to list
         datas.append(notes)
 
-    if(not isHavingtargetNote):
-        notes = {'filename': os.path.basename(xmlfile)}
-        datas.append(notes)
-    # print('parseXMLWithns ###################')
     # print(datas)
-    # return list
     return datas
 
 def parseXMLWithoutNs(xmlfile, targetSubNotes, targetNote):

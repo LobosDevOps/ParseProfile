@@ -1,0 +1,96 @@
+outputFileName: ParserProfileResult
+withns: true
+sfdc_metadata: http://soap.sforce.com/2006/04/metadata
+
+#Parser profile note
+inputdir: C:/temp/profiles
+
+field:
+  # fullName:
+  #   isTarget: true
+  #   note: fullName
+  #   subNotes: [fullName]
+  userLicense:
+    isTarget: true
+    note: userLicense
+    subNotes: [userLicense]
+  custom:
+    isTarget: true
+    note: custom
+    subNotes: [custom]
+  applicationVisibilities:
+    isTarget: true
+    note: applicationVisibilities
+    subNotes: [application, visible]
+  categoryGroupVisibilities:
+    isTarget: true
+    note: categoryGroupVisibilities
+    subNotes: [dataCategoryGroup, dataCategories, visibility]
+  classAccesses:
+    isTarget: true
+    note: classAccesses
+    subNotes: [apexClass, enabled]
+  customMetadataTypeAccesses:
+    isTarget: true
+    note: customMetadataTypeAccesses
+    subNotes: [name, enabled]
+  customPermissions:
+    isTarget: true
+    note: customPermissions
+    subNotes: [name, enabled]
+  customSettingAccesses:
+    isTarget: true
+    note: customSettingAccesses
+    subNotes: [name, enabled]
+  externalDataSourceAccesses:
+    isTarget: true
+    note: externalDataSourceAccesses
+    subNotes: [externalDataSource, enabled]
+  fieldPermissions:
+    isTarget: true
+    note: fieldPermissions
+    subNotes: [field, readable, editable]
+  flowAccesses:
+    isTarget: true
+    note: flowAccesses
+    subNotes: [flow, enabled]
+  layoutAssignments:
+    isTarget: true
+    note: layoutAssignments
+    subNotes: [layout, recordType]
+  loginFlows:
+    isTarget: true
+    note: loginFlows
+    subNotes: [flow, flowtype, friendlyname, uiLoginFlowType, useLightningRuntime, vfFlowPage, vfFlowPageTitle]
+  loginHours:
+    isTarget: true
+    note: loginHours
+    subNotes: [weekdayStart, weekdayEnd]
+  loginIpRanges:
+    isTarget: true
+    note: loginIpRanges
+    subNotes: [startAddress, endAddress, description]
+  objectPermissions:
+    isTarget: true
+    note: objectPermissions
+    subNotes: [object, allowRead, allowCreate, allowEdit, allowDelete, viewAllRecords, modifyAllRecords]
+  pageAccesses:
+    isTarget: true
+    note: pageAccesses
+    subNotes: [apexPage, enabled]
+  profileActionOverrides:
+    isTarget: true
+    note: profileActionOverrides
+    subNotes: [actionName, type, recordType, content, formFactor, pageOrSobjectType]
+  recordTypeVisibilities:
+    isTarget: true
+    note: recordTypeVisibilities
+    subNotes: [recordType, visible]
+  tabVisibilities:
+    isTarget: true
+    note: tabSettings
+    subNotes: [tab, visibility]
+  userPermissions:
+    isTarget: true
+    note: userPermissions
+    subNotes: [name, enabled]

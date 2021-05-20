@@ -12,6 +12,13 @@ def getXmlDataByList(path, targetNote, targetSubNotes, withns, sfdc_metadata):
             xmldata = utils.parseXMLWithns(fl, targetSubNotes, targetNote, sfdc_metadata)
         else:
             xmldata = utils.parseXMLWithoutNs(fl, targetSubNotes, targetNote)
+
+        # if xmldata is null , add filename
+        if(not xmldata):
+            notes = {'filename': os.path.basename(fl)}
+            xmldata = []
+            xmldata.append(notes)
+
         # print(xmldata)
         resultData.extend(xmldata)
     # print('getXmlDataByList resultData : ', resultData)
@@ -218,6 +225,12 @@ def parserProfileNote(configObj, isOutputFile):
             xmldata = utils.parseXMLWithns(fl, targetSubNotes, targetNote, sfdc_metadata)
         else:
             xmldata = utils.parseXMLWithoutNs(fl, targetSubNotes, targetNote)
+
+        # if xmldata is null , add filename
+        if(not xmldata):
+            notes = {'filename': os.path.basename(fl)}
+            xmldata = []
+            xmldata.append(notes)
 
         noteValue = ''
         for noteMap in xmldata:

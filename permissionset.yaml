@@ -1,0 +1,72 @@
+outputFileName: ParserPermissionsetResult
+withns: true
+sfdc_metadata: http://soap.sforce.com/2006/04/metadata
+
+#Parser profile note
+inputdir: C:/temp/permissionsets
+
+field:
+  label:
+    isTarget: true
+    note: label
+    subNotes: [label]
+  license:
+    isTarget: true
+    note: license
+    subNotes: [license]
+  hasActivationRequired:
+    isTarget: true
+    note: hasActivationRequired
+    subNotes: [hasActivationRequired]
+  applicationVisibilities:
+    isTarget: true
+    note: applicationVisibilities
+    subNotes: [application, visible]
+  classAccesses:
+    isTarget: true
+    note: classAccesses
+    subNotes: [apexClass, enabled]
+  customMetadataTypeAccesses:
+    isTarget: true
+    note: customMetadataTypeAccesses
+    subNotes: [name, enabled]
+  customPermissions:
+    isTarget: true
+    note: customPermissions
+    subNotes: [name, enabled]
+  customSettingAccesses:
+    isTarget: true
+    note: customSettingAccesses
+    subNotes: [name, enabled]
+  externalDataSourceAccesses:
+    isTarget: true
+    note: externalDataSourceAccesses
+    subNotes: [externalDataSource, enabled]
+  fieldPermissions:
+    isTarget: true
+    note: fieldPermissions
+    subNotes: [field, readable, editable]
+  flowAccesses:
+    isTarget: true
+    note: flowAccesses
+    subNotes: [flow, enabled]
+  objectPermissions:
+    isTarget: true
+    note: objectPermissions
+    subNotes: [object, allowRead, allowCreate, allowEdit, allowDelete, viewAllRecords, modifyAllRecords]
+  pageAccesses:
+    isTarget: true
+    note: pageAccesses
+    subNotes: [apexPage, enabled]
+  recordTypeVisibilities:
+    isTarget: true
+    note: recordTypeVisibilities
+    subNotes: [recordType, visible]
+  tabSettings:
+    isTarget: true
+    note: tabSettings
+    subNotes: [tab, visibility]
+  userPermissions:
+    isTarget: true
+    note: userPermissions
+    subNotes: [name, enabled]

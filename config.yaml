@@ -3,7 +3,7 @@ withns: true
 sfdc_metadata: http://soap.sforce.com/2006/04/metadata
 
 #Parser profile note
-parserProfileNote: 1
+parserProfileNote: 0
 inputSysProfilePath: C:/temp/profiles/Admin.profile-meta.xml
 note:
   applicationVisibilities: [application]
@@ -20,13 +20,18 @@ note:
 outputFileToCsvByList: 0
 OutputFileToCsvByMatrix: 0
 OutputFileToExlByMatrix: 0
+ParserPermissionSet: 1
+ParserProfile: 1
 
-inputdir: C:/temp/profiles
+# inputdir: C:/temp/profiles
+inputdir: C:/temp/permissionsets
 
 # For All(List, Matrix)
 csv:
-  targetNote: userPermissions
-  targetSubNotes: [filename, name, enabled]
+  targetNote: label
+  targetSubNotes: [filename, label]
+  # targetNote: userPermissions
+  # targetSubNotes: [filename, name, enabled]
   # For Matrix
   targetKey: name
 
