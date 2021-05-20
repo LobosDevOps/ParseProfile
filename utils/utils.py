@@ -25,7 +25,7 @@ def savetoTxt(datas, outputFileName):
     f = open(outputFileName, 'w', encoding='UTF-8')
     for(key, value) in datas.items():
         # print(key, value)
-        f.writelines(key + ':' + value + '\n')
+        f.writelines(key + ': ' + value + '\n')
     f.close()
 
 def parseXMLWithns(xmlfile, targetSubNotes, targetNote, sfdc_metadata):
